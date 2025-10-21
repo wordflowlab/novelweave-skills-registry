@@ -10,10 +10,8 @@
       "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-romance-writing",
       "version": "1.0.0",
       "category": "genre-knowledge",
-      "author": {
-        "name": "WordFlow Lab",
-        "contact": "https://github.com/wordflowlab"
-      },
+      "author": "WordFlow Lab",
+      "authorUrl": "https://github.com/wordflowlab",
       "verified": true,
       "keywords": [
         "romance",
@@ -35,10 +33,8 @@
       "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-fantasy-worldbuilding",
       "version": "1.0.0",
       "category": "genre-knowledge",
-      "author": {
-        "name": "WordFlow Lab",
-        "contact": "https://github.com/wordflowlab"
-      },
+      "author": "WordFlow Lab",
+      "authorUrl": "https://github.com/wordflowlab",
       "verified": true,
       "keywords": [
         "fantasy",
@@ -60,10 +56,8 @@
       "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-dialogue-techniques",
       "version": "1.0.0",
       "category": "writing-techniques",
-      "author": {
-        "name": "WordFlow Lab",
-        "contact": "https://github.com/wordflowlab"
-      },
+      "author": "WordFlow Lab",
+      "authorUrl": "https://github.com/wordflowlab",
       "verified": true,
       "keywords": [
         "dialogue",
