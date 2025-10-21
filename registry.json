@@ -1,0 +1,80 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2025-10-21T09:45:00Z",
+  "skills": [
+    {
+      "id": "romance-writing",
+      "type": "skill",
+      "name": "Romance Novel Conventions",
+      "description": "Comprehensive guidance on romance novel writing, including genre conventions, emotional pacing, relationship development patterns, and reader expectations for love stories and relationship-driven narratives.",
+      "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-romance-writing",
+      "version": "1.0.0",
+      "category": "genre-knowledge",
+      "author": {
+        "name": "WordFlow Lab",
+        "contact": "https://github.com/wordflowlab"
+      },
+      "verified": true,
+      "keywords": [
+        "romance",
+        "love story",
+        "relationship",
+        "emotional arc",
+        "HEA",
+        "contemporary romance",
+        "historical romance",
+        "romantic suspense"
+      ],
+      "minimumNovelWeaveVersion": "1.0.0"
+    },
+    {
+      "id": "fantasy-worldbuilding",
+      "type": "skill",
+      "name": "Fantasy World-Building",
+      "description": "Expert guidance on creating immersive fantasy worlds with consistent magic systems, rich cultures, deep history, and avoiding common fantasy pitfalls. Covers Sanderson's Laws of Magic and comprehensive world-building frameworks.",
+      "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-fantasy-worldbuilding",
+      "version": "1.0.0",
+      "category": "genre-knowledge",
+      "author": {
+        "name": "WordFlow Lab",
+        "contact": "https://github.com/wordflowlab"
+      },
+      "verified": true,
+      "keywords": [
+        "fantasy",
+        "world-building",
+        "magic system",
+        "high fantasy",
+        "low fantasy",
+        "urban fantasy",
+        "species design",
+        "Sanderson"
+      ],
+      "minimumNovelWeaveVersion": "1.0.0"
+    },
+    {
+      "id": "dialogue-techniques",
+      "type": "skill",
+      "name": "Natural Dialogue Techniques",
+      "description": "Professional techniques for writing authentic, character-driven dialogue that reveals personality and advances plot. Covers character voice differentiation, subtext, interruptions, and avoiding common dialogue mistakes.",
+      "repository": "https://github.com/wordflowlab/novelweave-skills-registry/tree/main/skills/skill-dialogue-techniques",
+      "version": "1.0.0",
+      "category": "writing-techniques",
+      "author": {
+        "name": "WordFlow Lab",
+        "contact": "https://github.com/wordflowlab"
+      },
+      "verified": true,
+      "keywords": [
+        "dialogue",
+        "conversation",
+        "character voice",
+        "subtext",
+        "natural speech",
+        "dialogue tags",
+        "character differentiation"
+      ],
+      "minimumNovelWeaveVersion": "1.0.0"
+    }
+  ]
+}

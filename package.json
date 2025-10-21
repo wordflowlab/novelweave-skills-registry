@@ -1,0 +1,32 @@
+{
+  "name": "novelweave-skills-registry",
+  "version": "1.0.0",
+  "description": "Official Skills Registry for NovelWeave - A centralized index for NovelWeave Skills Marketplace",
+  "main": "registry.json",
+  "scripts": {
+    "validate": "node scripts/validate-registry.js && node scripts/check-new-skills.js",
+    "validate:registry": "node scripts/validate-registry.js",
+    "validate:skills": "node scripts/check-new-skills.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wordflowlab/novelweave-skills-registry.git"
+  },
+  "keywords": [
+    "novelweave",
+    "skills",
+    "writing",
+    "novel",
+    "marketplace",
+    "registry"
+  ],
+  "author": "WordFlow Lab",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/wordflowlab/novelweave-skills-registry/issues"
+  },
+  "homepage": "https://github.com/wordflowlab/novelweave-skills-registry#readme",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

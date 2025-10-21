@@ -1,0 +1,133 @@
+name: Validate Skills
+
+on:
+  pull_request:
+    paths:
+      - 'registry.json'
+
+jobs:
+  validate:
+    name: Validate Registry and Skills
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout PR branch
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Fetch all history for git commands
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '18'
+
+      - name: Validate registry.json format
+        id: validate-registry
+        run: |
+          echo "Running registry validation..."
+          node scripts/validate-registry.js
+        continue-on-error: true
+
+      - name: Check new Skills
+        id: check-skills
+        run: |
+          echo "Checking new Skills..."
+          node scripts/check-new-skills.js
+        continue-on-error: true
+
+      - name: Read validation results
+        id: results
+        if: always()
+        run: |
+          if [ -f validation-results.json ]; then
+            echo "results_exist=true" >> $GITHUB_OUTPUT
+          else
+            echo "results_exist=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Post validation results as comment
+        if: always() && steps.results.outputs.results_exist == 'true'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const results = JSON.parse(fs.readFileSync('validation-results.json', 'utf-8'));
+
+            let comment = '## Skill Validation Results\n\n';
+
+            if (results.success) {
+              comment += '✅ **Validation passed**\n\n';
+            } else {
+              comment += '❌ **Validation failed**\n\n';
+            }
+
+            // Show errors if any
+            if (results.errors && results.errors.length > 0) {
+              comment += '### Errors\n\n';
+              results.errors.forEach(error => {
+                comment += `- ❌ ${error}\n`;
+              });
+              comment += '\n';
+            }
+
+            // Show new Skills
+            if (results.newSkills && results.newSkills.length > 0) {
+              comment += '### New Skills Detected\n\n';
+              results.newSkills.forEach(skill => {
+                const repoStatus = skill.repositoryAccessible ? '✅' : '❌';
+                const skillMdStatus = skill.skillMdValid ? '✅' : '❌';
+
+                comment += `#### ${skill.name} (\`${skill.id}\`)\n\n`;
+                comment += `- ${repoStatus} Repository accessible\n`;
+                comment += `- ${skillMdStatus} SKILL.md valid\n`;
+
+                if (skill.repositoryError) {
+                  comment += `  - ❌ ${skill.repositoryError}\n`;
+                }
+                if (skill.skillMdError) {
+                  comment += `  - ❌ ${skill.skillMdError}\n`;
+                }
+                comment += '\n';
+              });
+            } else if (results.errors.length === 0) {
+              comment += '### Changes\n\n';
+              comment += 'ℹ️ No new Skills detected (updates to existing Skills or metadata changes)\n\n';
+            }
+
+            // Add next steps
+            if (results.success) {
+              comment += '### Next Steps\n\n';
+              comment += '1. ✅ Automated validation passed\n';
+              comment += '2. ⏳ Awaiting manual review from WordFlow Lab team\n';
+              comment += '3. 📝 Review will check content quality and relevance\n\n';
+              comment += 'Estimated review time: 3 business days\n';
+            } else {
+              comment += '### Required Actions\n\n';
+              comment += 'Please fix the errors listed above and update your PR.\n';
+              comment += 'The validation will run automatically when you push changes.\n';
+            }
+
+            // Post comment
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: comment
+            });
+
+      - name: Set validation status
+        if: always()
+        run: |
+          if [ -f validation-results.json ]; then
+            SUCCESS=$(cat validation-results.json | jq -r '.success')
+            if [ "$SUCCESS" = "true" ]; then
+              echo "✅ Validation successful"
+              exit 0
+            else
+              echo "❌ Validation failed"
+              exit 1
+            fi
+          else
+            echo "❌ No validation results found"
+            exit 1
+          fi
